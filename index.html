@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+  </head>
+  <body>
+
+    <input type="text" placeholder="text" id="myInput">
+    <input type="button" value="ADD" id="addTextDiv">
+    <input type="button" value="SAVE" id="saveBtn">
+    <input type="button" value="Insert From Clipboard" id="insertClip">
+    <div id="elementsListDiv"></div>
+  
+    <script src="./renderer.js"></script>
+  </body>
+</html>

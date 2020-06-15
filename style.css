@@ -1,0 +1,40 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body{
+    background-color: yellowgreen;
+}
+
+/* #elementsListDiv li{
+    background-color: yellow;
+    margin-bottom: 1px;
+    padding-left: 20px;
+} */
+
+.listItem{
+    background-color: yellow;
+    padding: 3px 5px;
+    margin: 2px 0;
+}
+
+li:hover{
+    background-color: rgba(130, 238, 224, 0.445) !important;
+}
+
+.left{
+    float: left;
+    width: 80%;
+}
+
+.right{
+    float: right;
+}
+
+input[type="button"]{
+    min-width: 20px;
+    border: 1px solid grey;
+    background-color: rgb(170, 255, 0);
+    padding: 0 3px;
+}
