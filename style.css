@@ -17,6 +17,7 @@ body{
     background-color: yellow;
     padding: 3px 5px;
     margin: 2px 0;
+    display: table;
 }
 
 li:hover{

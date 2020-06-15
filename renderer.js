@@ -1,31 +1,23 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// No Node.js APIs are available in this process because
-// `nodeIntegration` is turned off. Use `preload.js` to
-// selectively enable features needed in the rendering
-// process.
-
 const { ipcRenderer } = require('electron')
 
-// let currentClipboard;
 let selectedElement;
 let elementsList = [];
-const myInput = document.getElementById("myInput")
+const clipInput = document.getElementById("clipInput")
 const saveBtn = document.getElementById("saveBtn")
 const insertClip = document.getElementById("insertClip")
-const elementsListDiv = document.getElementById("elementsListDiv");
+const clipList = document.getElementById("clipList");
 
 fetch("./data.json")
 .then(res=>res.json())
 .then(res=>{
-    elementsList.push(...res);
+    elementsList = res;
     renderElementsList();
 })
 
 const addText = () => {
-    if(!myInput.value) return; 
-    elementsList.push(myInput.value);
-    myInput.value = "";
+    if(!clipInput.value) return; 
+    elementsList.push(clipInput.value);
+    clipInput.value = "";
     saveBtn.value = "NOT SAVED";
     renderElementsList();
 }
@@ -55,35 +47,22 @@ insertClip.onclick = () => {
 }
 
 ipcRenderer.on("getCurrentClipboard-reply", (event, arg) => {
-    elementsList.push(arg);
+    elementsList.push(String(arg));
     saveBtn.value = "NOT SAVED";
     renderElementsList();
 });
-
-// ipcRenderer.send('getCurrentClipboard', '')
-// document.getElementById("getCurrentClipboardDiv").addEventListener("click", () => {
-//     ipcRenderer.send('getCurrentClipboard', '')
-// })
-
-// ipcRenderer.on("getCurrentClipboard-reply", (event, arg) => {
-//     console.log(Date.now())
-//     currentClipboardDiv.innerText = String(arg);
-// });
 
 saveBtn.onclick = () => {
     ipcRenderer.send('saveBtn', JSON.stringify(elementsList))
     saveBtn.value = "SAVED";
 }
 
-
 const renderElementsList = () => {
-    elementsListDiv.innerHTML = "";
+    clipList.innerHTML = "";
     const ul = document.createElement("ul");
-    elementsListDiv.appendChild(ul);
+    clipList.appendChild(ul);
 
-    for (let i = 0; i < elementsList.length; i++) {
-        const element = elementsList[i];
-
+    elementsList.forEach((element, i) => {
         const li = document.createElement("li")
         li.className = "listItem";
 
@@ -102,5 +81,5 @@ const renderElementsList = () => {
         li.appendChild(spanLeft);
         li.appendChild(spanRight);
         ul.appendChild(li);
-    }
+    })
 };
